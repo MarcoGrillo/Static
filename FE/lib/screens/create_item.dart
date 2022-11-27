@@ -11,7 +11,7 @@ class CreateItemScreen extends StatefulWidget {
 }
 
 class _CreateItemScreenState extends State<CreateItemScreen> {
-  Color pickedColor = Colors.white;
+  Color pickedColor = Colors.black12;
   bool _isPickerVisible = false;
 
   void selectColor(color) {
@@ -34,7 +34,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
   }
 
   Widget _buildColorTextField(context, text, enabled, color) {
-    color ??= Colors.white;
+    color ??= Colors.black12;
 
     return InkWell(
         onTap: () {
@@ -66,20 +66,18 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
         focusedBorder: _buildOutlineInputBorder(),
         disabledBorder: _buildOutlineInputBorder(),
         filled: true,
-        fillColor: Colors.black12,
+        fillColor: enabled ? Colors.black12 : pickedColor,
         suffixIcon: !enabled
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
+            ? const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
-                  backgroundColor: pickedColor ?? Colors.white,
+                  backgroundColor: Colors.white,
                   child: Align(
                     widthFactor: 1.0,
                     heightFactor: 1.0,
                     child: Icon(
                       Icons.colorize,
-                      color: pickedColor as Color == Colors.white
-                          ? Colors.black
-                          : Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -120,8 +118,7 @@ class _CreateItemScreenState extends State<CreateItemScreen> {
                   height: 20,
                 ),
                 _buildTextFieldHeader(context, 'Colore'),
-                _buildColorTextField(
-                    context, 'Scegli un colore...', false, pickedColor),
+                _buildColorTextField(context, '', false, pickedColor),
                 AnimatedOpacity(
                   opacity: _isPickerVisible ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 300),

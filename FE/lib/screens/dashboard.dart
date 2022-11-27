@@ -22,7 +22,7 @@ class DashboardScreen extends StatelessWidget {
       body: Center(
         child: FolderList(),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addFolder(context),
         elevation: 4,
