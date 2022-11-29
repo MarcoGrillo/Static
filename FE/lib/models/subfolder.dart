@@ -4,12 +4,12 @@ class Subfolder {
   final String id;
   final String folderId;
   final String title;
-  final Color color;
+  final List<Color> colors;
 
   const Subfolder({
     required this.id,
     required this.folderId,
     required this.title,
-    required this.color,
+    required this.colors,
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:static_app/screens/create_item.dart';
 
 import 'package:static_app/screens/dashboard.dart';
+import 'package:static_app/screens/subfolders.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,11 +33,18 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
+              headlineLarge: const TextStyle(
+                fontSize: 20,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
       ),
       home: const DashboardScreen(),
       routes: {
-        CreateItemScreen.routeName: (context) => const CreateItemScreen()
+        CreateItemScreen.routeName: (context) => const CreateItemScreen(),
+        SubfolderListScreen.routeName: (context) => const SubfolderListScreen(),
       },
       onUnknownRoute: (settings) =>
           MaterialPageRoute(builder: (context) => const DashboardScreen()),

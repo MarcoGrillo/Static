@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:static_app/screens/subfolders.dart';
 
 class FolderCard extends StatelessWidget {
   Color folderColor = Colors.black;
-  FolderCard(this.folderColor, {super.key});
+  BoxConstraints boxConstraints;
+  String folderTitle = '';
+
+  FolderCard(this.folderColor, this.folderTitle, this.boxConstraints,
+      {super.key});
+
+  void _openFolder(context) {
+    Navigator.of(context).pushNamed(SubfolderListScreen.routeName, arguments: {
+      'appBarTitle': folderTitle,
+      'constraints': boxConstraints,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => _openFolder(context),
       borderRadius: BorderRadius.circular(15),
       child: Container(
         decoration: BoxDecoration(
@@ -33,7 +45,7 @@ class FolderCard extends StatelessWidget {
                 color: folderColor,
               ),
               Text(
-                'Cartella 1',
+                folderTitle,
                 style: Theme.of(context).textTheme.headline5,
               ),
             ],

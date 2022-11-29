@@ -3,26 +3,12 @@ import 'package:static_app/models/folder.dart';
 import 'package:static_app/widgets/folder_card.dart';
 import 'package:static_app/widgets/statistics.dart';
 
+import 'package:static_app/mock/data.dart';
+
 class FolderList extends StatelessWidget {
   FolderList({super.key});
 
-  final List<Folder> folders = [
-    const Folder(
-      id: '1',
-      title: 'First',
-      color: Colors.green,
-    ),
-    const Folder(
-      id: '2',
-      title: 'Second',
-      color: Colors.red,
-    ),
-    const Folder(
-      id: '3',
-      title: 'Third',
-      color: Colors.blue,
-    ),
-  ];
+  List<Folder> foldersList = folders;
 
   Widget _buildEmptyListLayout() {
     return LayoutBuilder(
@@ -51,7 +37,13 @@ class FolderList extends StatelessWidget {
     );
   }
 
-  Widget _buildFolderList(context) {
+  Widget _buildFolderListLayout(context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      return _buildFolderList(context, constraints);
+    });
+  }
+
+  Widget _buildFolderList(context, constraints) {
     return Padding(
       padding: const EdgeInsets.only(
         top: 20,
@@ -84,9 +76,13 @@ class FolderList extends StatelessWidget {
               },
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return FolderCard(folders[index].color.withOpacity(0.7));
+                return FolderCard(
+                  foldersList[index].color.withOpacity(0.7),
+                  foldersList[index].title,
+                  constraints,
+                );
               },
-              itemCount: folders.length,
+              itemCount: foldersList.length,
             ),
           ),
           Container(
@@ -100,7 +96,7 @@ class FolderList extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          Statistics(folders),
+          Statistics(foldersList),
         ],
       ),
     );
@@ -109,8 +105,9 @@ class FolderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child:
-          folders.isEmpty ? _buildEmptyListLayout() : _buildFolderList(context),
+      child: foldersList.isEmpty
+          ? _buildEmptyListLayout()
+          : _buildFolderListLayout(context),
     );
   }
 }
