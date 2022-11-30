@@ -16,6 +16,8 @@ class SubfolderListScreen extends StatefulWidget {
 class _SubfolderListScreenState extends State<SubfolderListScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Subfolder> subfoldersList = subfolders;
+
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
 
@@ -25,9 +27,29 @@ class _SubfolderListScreenState extends State<SubfolderListScreen> {
     //final String? boxConstraints = routeArgs['constraints'];
     final appBar = AppBar(
       title: Text(title ?? 'Nuovo'),
+      bottom: TabBar(
+        isScrollable: true, // Required
+        unselectedLabelColor: Colors.white30, // Other tabs color
+        labelPadding: const EdgeInsets.symmetric(
+          horizontal: 30,
+        ), // Space between tabs
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 2,
+          ), // Indicator height
+          insets: EdgeInsets.symmetric(
+            horizontal: 48,
+          ), // Indicator width
+        ),
+        tabs: [
+          for (var subfolder in subfoldersList)
+            Tab(
+              text: subfolder.title,
+            )
+        ],
+      ),
     );
-
-    List<Subfolder> subfoldersList = subfolders;
 
     Widget buildSubFolderList(itemCount) {
       // print(routeArgs['appBarTitle']);
@@ -58,12 +80,16 @@ class _SubfolderListScreenState extends State<SubfolderListScreen> {
       );
     }
 
-    return Scaffold(
-      appBar: appBar,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: buildSubFolderList(subfoldersList.length),
+    return DefaultTabController(
+      initialIndex: 0,
+      length: subfoldersList.length,
+      child: Scaffold(
+        appBar: appBar,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+              // child: buildSubFolderList(subfoldersList.length),
+              ),
         ),
       ),
     );
