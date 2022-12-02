@@ -21,7 +21,7 @@ class Statistics extends StatelessWidget {
         ),
       ),
       width: double.infinity,
-      height: 325,
+      height: 300,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: ListView.separated(

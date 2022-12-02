@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:static_app/models/folder.dart';
 import 'package:static_app/models/subfolder.dart';
+import 'package:static_app/models/task.dart';
 
 const folders = [
   Folder(
@@ -29,6 +30,44 @@ List<Subfolder> subfolders = [
       Colors.red.shade400,
       Colors.red.shade300,
     ],
+    tasks: [
+      const Task(
+        id: '1',
+        subfolderId: '1',
+        title: 'Controllare esami',
+        description: 'TAC, RX, Esami del sangue',
+        completed: true,
+      ),
+      const Task(
+        id: '2',
+        subfolderId: '1',
+        title: 'TAC Mario Rossi',
+        description:
+            'Richiedere TAC per il sig. Mario Rossi per il primo giorno disponibile',
+        completed: true,
+      ),
+      const Task(
+        id: '1',
+        subfolderId: '2',
+        title: '',
+        description: '',
+        completed: false,
+      ),
+      const Task(
+        id: '2',
+        subfolderId: '2',
+        title: '',
+        description: '',
+        completed: false,
+      ),
+      const Task(
+        id: '5',
+        subfolderId: '1',
+        title: '',
+        description: '',
+        completed: false,
+      ),
+    ],
   ),
   Subfolder(
     id: '2',
@@ -38,6 +77,7 @@ List<Subfolder> subfolders = [
       Colors.green.shade400,
       Colors.green.shade300,
     ],
+    tasks: [],
   ),
   Subfolder(
     id: '3',
@@ -47,6 +87,7 @@ List<Subfolder> subfolders = [
       Colors.yellow.shade400,
       Colors.yellow.shade300,
     ],
+    tasks: [],
   ),
   Subfolder(
     id: '4',
@@ -56,5 +97,6 @@ List<Subfolder> subfolders = [
       Colors.teal.shade400,
       Colors.teal.shade300,
     ],
+    tasks: [],
   ),
 ];

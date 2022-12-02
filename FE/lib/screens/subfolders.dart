@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:static_app/models/subfolder.dart';
-
 import 'package:static_app/mock/data.dart';
-import 'package:static_app/widgets/subfolder_card.dart';
+import 'package:static_app/widgets/task_list.dart';
 
 class SubfolderListScreen extends StatefulWidget {
   const SubfolderListScreen({super.key});
@@ -33,7 +32,7 @@ class _SubfolderListScreenState extends State<SubfolderListScreen> {
         labelPadding: const EdgeInsets.symmetric(
           horizontal: 30,
         ), // Space between tabs
-        indicator: UnderlineTabIndicator(
+        indicator: const UnderlineTabIndicator(
           borderSide: BorderSide(
             color: Colors.white,
             width: 2,
@@ -51,34 +50,7 @@ class _SubfolderListScreenState extends State<SubfolderListScreen> {
       ),
     );
 
-    Widget buildSubFolderList(itemCount) {
-      // print(routeArgs['appBarTitle']);
-      return Container(
-        margin: const EdgeInsets.only(
-          top: 60,
-        ),
-        height: boxConstraints.maxHeight * 0.8,
-        //height: 500,
-        width: double.infinity,
-        child: ListView.separated(
-          physics: const BouncingScrollPhysics(),
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 20,
-            );
-          },
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            // return subfolder_card
-            return SubfolderCard(
-              subfoldersList[index].colors,
-              subfoldersList[index].title,
-            );
-          },
-          itemCount: itemCount,
-        ),
-      );
-    }
+    int? folderId = DefaultTabController.of(context)?.index;
 
     return DefaultTabController(
       initialIndex: 0,
@@ -88,8 +60,12 @@ class _SubfolderListScreenState extends State<SubfolderListScreen> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
-              // child: buildSubFolderList(subfoldersList.length),
-              ),
+            child: TaskList(
+              boxConstraints,
+              subfoldersList,
+              folderId ?? 0,
+            ),
+          ),
         ),
       ),
     );

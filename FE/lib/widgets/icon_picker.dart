@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 
-import 'package:static_app/utils/colors_list.dart';
+import 'package:static_app/utils/icons_list.dart';
 
 // ignore: must_be_immutable
-class ColorPicker extends StatefulWidget {
+class IconPicker extends StatefulWidget {
   double appBarHeight = 0;
 
-  final Function selectColor;
+  final Function selectIcon;
 
-  ColorPicker(this.appBarHeight, this.selectColor, {super.key});
+  IconPicker(this.appBarHeight, this.selectIcon, {super.key});
 
   @override
-  State<ColorPicker> createState() => _ColorPickerState();
+  State<IconPicker> createState() => _IconPickerState();
 }
 
-class _ColorPickerState extends State<ColorPicker> {
-  Widget _buildSelectableColor(color) {
+class _IconPickerState extends State<IconPicker> {
+  Widget _buildSelectableIcon(iconData) {
     return InkWell(
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(200),
       ),
       onTap: () {
-        widget.selectColor(color);
+        widget.selectIcon(iconData);
       },
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: CircleAvatar(
-          backgroundColor: color,
+          backgroundColor: Colors.white,
+          child: Icon(
+            iconData,
+            color: Colors.black,
+          ),
         ),
       ),
     );
@@ -39,7 +43,7 @@ class _ColorPickerState extends State<ColorPicker> {
         top: 30,
       ),
       child: Container(
-        height: 325,
+        height: 150,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.black12,
@@ -50,7 +54,8 @@ class _ColorPickerState extends State<ColorPicker> {
           crossAxisSpacing: 3,
           mainAxisSpacing: 3,
           children: [
-            for (Color color in pickerColors) _buildSelectableColor(color)
+            for (IconData iconData in pickerIcons)
+              _buildSelectableIcon(iconData)
           ],
         ),
       ),
